@@ -1,0 +1,10 @@
+{
+  "name": "Екстрийм Зон",
+  "phone1": "0878592952",
+  "phone2": "${p}",
+  "photo": "photos/Екстрийм зон.jpg",
+  "specialties": [
+    "'+entry[0]+'"
+  ],
+  "active": true
+}

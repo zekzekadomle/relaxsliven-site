@@ -1,0 +1,241 @@
+{
+  "haskovo": [
+    "milena-miteva.json",
+    "mariya-kamburova.json",
+    "rositsa-delcheva.json",
+    "sonya-bahova.json",
+    "nazife-topal.json",
+    "ivanka-pencheva.json",
+    "zlatomir-kolev.json",
+    "${displayname}.json",
+    "mariya-vasileva.json",
+    "denitsa-marinova.json"
+  ],
+  "montana": [
+    "mariya-krumova.json",
+    "${displayname}.json"
+  ],
+  "veliko-tarnovo": [
+    "lidiya-slavkova.json",
+    "svetlana-borisova.json",
+    "veronika-toncheva.json",
+    "zlatina-nikolova.json",
+    "${displayname}.json",
+    "valeriya-zvezdeva.json",
+    "mariya-stankova.json"
+  ],
+  "blagoevgrad": [
+    "mariya-beganova.json",
+    "irina-tancheva.json",
+    "mariya-harizanova.json",
+    "elena-linch.json",
+    "anna-angelova.json",
+    "ivayla-litova.json",
+    "${displayname}.json",
+    "viktoriya-shamkalova.json"
+  ],
+  "dobrich": [
+    "gergana-peneva.json",
+    "todorka-vladeva.json",
+    "didito-raycheva.json",
+    "${displayname}.json",
+    "antoniya-dzhudzheva.json"
+  ],
+  "yambol": [
+    "ivelin-stoyanov.json",
+    "mariya-kazakova.json",
+    "veselina-dimitrova.json",
+    "plamena-cholakova.json",
+    "martin-mitev.json",
+    "iliyana-trendafilova.json",
+    "donika-georgieva.json",
+    "ahmed-sashev.json",
+    "${displayname}.json",
+    "veneta-slavova.json",
+    "fenya-simeonova.json",
+    "yordanka-pencheva.json"
+  ],
+  "gabrovo": [
+    "anya-genova.json",
+    "${displayname}.json",
+    "vilimira-stoyanova.json"
+  ],
+  "kardzhali": [
+    "${displayname}.json",
+    "ani-koleva.json"
+  ],
+  "razgrad": [
+    "yoana-boneva.json",
+    "${displayname}.json"
+  ],
+  "targovishte": [
+    "melek-nihatova.json",
+    "yordanka-stancheva.json",
+    "${displayname}.json"
+  ],
+  "pazardzhik": [
+    "tanya-boseva.json",
+    "${displayname}.json"
+  ],
+  "stara-zagora": [
+    "ivan-mitev.json",
+    "olesya-uzunova.json",
+    "boryana-guncheva.json",
+    "maya-krasteva.json",
+    "gencho-vasilev.json",
+    "simona-chalgadzhiyan.json",
+    "evelina-stoyanova.json",
+    "${displayname}.json"
+  ],
+  "kyustendil": [
+    "iveta-dineva.json",
+    "rositsa-todorova.json",
+    "${displayname}.json",
+    "aleksandra-hristova.json",
+    "zdravka-ilieva.json"
+  ],
+  "plovdiv": [
+    "gergana-koleva.json",
+    "yoana-karalieva.json",
+    "yanka-nikolova.json",
+    "tanya-ivanova.json",
+    "stela-yovcheva.json",
+    "penka-kabrandzhieva.json",
+    "${displayname}.json",
+    "ibrahim-smail.json",
+    "lazarina-pirimova.json",
+    "dilyana-petrova.json",
+    "yuliya-petrova.json",
+    "zlatina-dimitrova.json",
+    "ralitsa-hadzhieva.json"
+  ],
+  "vidin": [
+    "${displayname}.json"
+  ],
+  "sliven": [
+    "bozhidara-nikolova.json",
+    "ekaterina-prodanova.json",
+    "aysel-topchieva.json",
+    "katerina-velinova.json",
+    "magdalena-gabarova.json",
+    "galena-stancheva.json",
+    "dimitar-yordanov.json",
+    "aneliya-atanasova.json",
+    "reni-daneva.json",
+    "georgi-terziev.json",
+    "didi-stoilova.json",
+    "simona-dinkova.json",
+    "gergana-stoyanova.json",
+    "stoyan-tsaruhov.json",
+    "nikolay-ivanov-brasnarnitsa-681.json",
+    "asiana-ivanova.json",
+    "galina-dyulgerova.json",
+    "yuliyan-naskov.json",
+    "martina-gavova.json",
+    "ekstriym-zon.json",
+    "tanya-valcheva.json",
+    "elif-sadullova.json",
+    "${displayname}.json",
+    "hristina-dimova.json",
+    "yosko-yoskov.json",
+    "mina-zhecheva.json",
+    "daniela-neykova.json",
+    "blagovesta-karaivanova.json",
+    "irena-teneva.json",
+    "penka-gospodinova.json"
+  ],
+  "smolyan": [
+    "elvira-dyulgerova.json",
+    "${displayname}.json",
+    "desislava-uycheva.json"
+  ],
+  "sofiya-oblast": [
+    "iveta-hadzhikireva.json",
+    "temenuzhka-stanoeva.json",
+    "viktoriya-valyavicharska.json",
+    "aleksandra-georgieva.json",
+    "monika-semova.json",
+    "marieta-mraskova.json",
+    "kameliya-dincheva.json",
+    "petya-georgieva.json",
+    "valentin-kirilov.json",
+    "monika-tsvetkova.json",
+    "dayana-stoyanovska.json",
+    "mihaela-stoycheva.json",
+    "lidiya-andreeva.json",
+    "radina-krasteva.json",
+    "vladimira-marinova.json",
+    "petya-lazarova.json",
+    "aleksi-nalbantov.json",
+    "stefka-lalova.json",
+    "neli-dineva.json",
+    "tsvetomira-georgieva.json",
+    "kristiyana-atanasova.json",
+    "daniela-pavlova.json",
+    "verginiya-misheva.json",
+    "katerina-nikolova.json",
+    "monika-mandradzhieva.json",
+    "${displayname}.json",
+    "anastasiya-krasteva.json",
+    "elizabet-traykova.json",
+    "diana-konova.json",
+    "mariya-evgenieva.json",
+    "veronika-kovacheva.json",
+    "nikolay-yordanov.json",
+    "marianna-bodleva.json",
+    "liliya-mileva.json",
+    "emiliana-nacheva.json",
+    "yuliya-dimitrova.json",
+    "martina-marinova.json"
+  ],
+  "ruse": [
+    "nadya-petrova.json",
+    "mari-papazyan.json",
+    "${displayname}.json",
+    "tanya-angelova.json",
+    "ani-danova.json"
+  ],
+  "vratsa": [
+    "ivana-nenovska.json",
+    "${displayname}.json"
+  ],
+  "varna": [
+    "filka-georgieva.json",
+    "svetlana-topchieva.json",
+    "gergana-pushkarova.json",
+    "elena-zhekova.json",
+    "yoanna-georgieva.json",
+    "teodora-koleva.json",
+    "${displayname}.json",
+    "katerina-aleksieva.json",
+    "denitsa-dimitrova.json",
+    "kristiana-toncheva.json",
+    "anabel-uzunova.json",
+    "vladislava-nikolova.json"
+  ],
+  "pernik": [
+    "lina-valerieva.json",
+    "${displayname}.json"
+  ],
+  "burgas": [
+    "diana-dimitrova.json",
+    "nadezhda-kirova.json",
+    "ilina-yonovska.json",
+    "miroslava-miteva.json",
+    "ralitsa-dimitrova.json",
+    "desislava-minovska.json",
+    "silviya-stefanova.json",
+    "kristiana-gocheva.json",
+    "peter-yanev.json",
+    "${displayname}.json",
+    "keri-zlateva.json",
+    "galina-ilcheva.json",
+    "ivaylo-boshnakov.json",
+    "diana-todorova.json"
+  ],
+  "lovech": [],
+  "pleven": [],
+  "silistra": [],
+  "sofiya": [],
+  "shumen": []
+}
