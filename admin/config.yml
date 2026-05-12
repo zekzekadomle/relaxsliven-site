@@ -1,0 +1,650 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "photos"
+public_folder: "photos"
+
+locale: bg
+
+collections:
+
+  # ── НАСТРОЙКИ НА САЙТА ──────────────────────────────────────────────
+  - name: "settings"
+    label: "⚙️ Настройки на сайта"
+    files:
+      - name: "contact"
+        label: "Контактна информация"
+        file: "data/contact.json"
+        fields:
+          - {label: "Директор", name: director, widget: string}
+          - {label: "Телефон", name: phone, widget: string}
+          - {label: "Имейл 1", name: email1, widget: string}
+          - {label: "Имейл 2", name: email2, widget: string, required: false}
+          - {label: "Адрес", name: address, widget: string}
+          - {label: "Facebook URL", name: facebook, widget: string, required: false}
+          - {label: "Instagram URL", name: instagram, widget: string, required: false}
+
+      - name: "hero"
+        label: "Начална страница — Hero"
+        file: "data/hero.json"
+        fields:
+          - {label: "Заглавие ред 1", name: title1, widget: string, hint: "напр. АКАДЕМИЯ"}
+          - {label: "Заглавие ред 2 (злато)", name: title2, widget: string, hint: "напр. РЕЛАКС"}
+          - {label: "Подзаглавие", name: subtitle, widget: text}
+          - {label: "Брой учебни бази", name: stat_bases, widget: number}
+          - {label: "Брой преподаватели", name: stat_teachers, widget: number}
+          - {label: "Брой дипломирани", name: stat_graduates, widget: string, hint: "напр. 2000+"}
+          - {label: "Брой специалности", name: stat_specialties, widget: number}
+
+  # ── ПРЕПОДАВАТЕЛИ ПО ОБЛАСТИ ─────────────────────────────────────────
+  - name: "specialists"
+    label: "👩‍🏫 Преподаватели"
+    label_singular: "Преподавател"
+    files:
+      - name: "all"
+        label: "Всички преподаватели"
+        file: "data/specialists.json"
+        fields:
+          - label: "Области"
+            name: "."
+            widget: "object"
+            fields:
+              - label: "Благоевград"
+                name: "Благоевград"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Бургас"
+                name: "Бургас"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Добрич"
+                name: "Добрич"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Габрово"
+                name: "Габрово"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Хасково"
+                name: "Хасково"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Кърджали"
+                name: "Кърджали"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Кюстендил"
+                name: "Кюстендил"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Монтана"
+                name: "Монтана"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Пазарджик"
+                name: "Пазарджик"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Перник"
+                name: "Перник"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Пловдив"
+                name: "Пловдив"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Разград"
+                name: "Разград"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Русе"
+                name: "Русе"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Сливен"
+                name: "Сливен"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Смолян"
+                name: "Смолян"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "София-Област"
+                name: "София-Област"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Стара Загора"
+                name: "Стара Загора"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Търговище"
+                name: "Търговище"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Варна"
+                name: "Варна"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Велико Търново"
+                name: "Велико Търново"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Видин"
+                name: "Видин"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Враца"
+                name: "Враца"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
+              - label: "Ямбол"
+                name: "Ямбол"
+                widget: list
+                label_singular: "Преподавател"
+                fields:
+                  - {label: "Имена", name: name, widget: string}
+                  - {label: "Телефон 1", name: phone1, widget: string, required: false}
+                  - {label: "Телефон 2", name: phone2, widget: string, required: false}
+                  - label: "Специалности"
+                    name: specialties
+                    widget: select
+                    multiple: true
+                    required: false
+                    options:
+                      - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+                      - {label: "Фризьорство", value: "Фризьорство"}
+                      - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+                      - {label: "Козметика", value: "Козметика"}
+                      - {label: "Масаж", value: "Масаж"}
+                      - {label: "Миглопластика", value: "Миглопластика"}
+                      - {label: "Микроблейдинг", value: "Микроблейдинг"}
+                      - {label: "Грим", value: "Грим"}
+                      - {label: "Перманентен грим", value: "Перманентен грим"}
+                      - {label: "Спорт", value: "Спорт"}
+                  - {label: "Профилна снимка", name: photo, widget: image, required: false}
+                  - {label: "Активен", name: active, widget: boolean, default: true}
