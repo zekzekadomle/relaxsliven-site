@@ -1780,27 +1780,51 @@ if (window.netlifyIdentity) {
   });
 }
 </script>
-<script>
-fetch('/data/hero.json').then(function(r){return r.json();}).then(function(d){
-  var h1 = document.querySelector('.hero-h1');
-  if (h1 && d.title1 && d.title2) {
-    h1.innerHTML = d.title1 + '<br><span>' + d.title2 + '</span>';
-  }
-  var sub = document.querySelector('.hero-sub');
-  if (sub && d.subtitle) sub.textContent = d.subtitle;
-  // Update stats
-  var stats = document.querySelectorAll('.hst-n');
-  var vals = [d.stat_bases, d.stat_teachers, d.stat_graduates, d.stat_specialties];
-  stats.forEach(function(el, i){ if (vals[i] !== undefined) el.textContent = vals[i]; });
-}).catch(function(){});
 
-fetch('/data/contact.json').then(function(r){return r.json();}).then(function(d){
-  // Update any phone numbers shown
-  document.querySelectorAll('a[href="tel:0878592952"]').forEach(function(el){
-    el.href = 'tel:' + d.phone;
-    el.textContent = d.phone.replace(/(\d{4})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4');
-  });
-}).catch(function(){});
+<script>
+(function(){
+  // Hero
+  fetch('/data/hero.json').then(function(r){return r.json();}).then(function(d){
+    var h1=document.querySelector('.hero-h1');
+    if(h1&&d.title1&&d.title2) h1.innerHTML=d.title1+'<br><span>'+d.title2+'</span>';
+    var sub=document.querySelector('.hero-sub');
+    if(sub&&d.subtitle) sub.textContent=d.subtitle;
+    var img=document.querySelector('.hero-img');
+    if(img&&d.hero_image) img.src=d.hero_image;
+    var stats=document.querySelectorAll('.hst-n');
+    var vals=[d.stat_bases,d.stat_teachers,d.stat_graduates,d.stat_specialties];
+    stats.forEach(function(el,i){if(vals[i]!==undefined)el.textContent=vals[i];});
+  }).catch(function(){});
+  // Contact in nav phone
+  fetch('/data/contact.json').then(function(r){return r.json();}).then(function(d){
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(el){
+      el.href='tel:'+d.phone.replace(/\s/g,'');
+    });
+    document.querySelectorAll('.nav-phone,.nb-phone').forEach(function(el){
+      el.textContent=d.phone;
+    });
+  }).catch(function(){});
+  // Footer links
+  fetch('/data/footer.json').then(function(r){return r.json();}).then(function(d){
+    var ftCols=document.querySelectorAll('.ft-col');
+    ftCols.forEach(function(col){
+      var h4=col.querySelector('h4');
+      if(!h4) return;
+      if(h4.textContent.trim()==='Полезни връзки'&&d.useful_links){
+        var ul=col.querySelector('ul');
+        if(ul) ul.innerHTML=d.useful_links.map(function(l){
+          return '<li><a class="ft-link" href="'+l.url+'" target="_blank" rel="noopener">'+l.label+'</a></li>';
+        }).join('');
+      }
+      if(h4.textContent.trim()==='Нормативни документи'&&d.normative_docs){
+        var ul2=col.querySelector('ul');
+        if(ul2) ul2.innerHTML=d.normative_docs.map(function(l){
+          return '<li><button onclick="location.href=''+l.url+''">'+l.label+'</button></li>';
+        }).join('');
+      }
+    });
+  }).catch(function(){});
+})();
 </script>
 </body>
 </html>

@@ -9,64 +9,26 @@ locale: bg
 
 collections:
 
-  # ── НАСТРОЙКИ ────────────────────────────────────────────────────────
+  # ════════════════════════════════════════════════
+  # НАСТРОЙКИ НА САЙТА
+  # ════════════════════════════════════════════════
   - name: "settings"
     label: "⚙️ Настройки на сайта"
     files:
 
       - name: "hero"
-        label: "🏠 Начална страница"
+        label: "🏠 Начална страница — Hero"
         file: "data/hero.json"
         fields:
-          - {label: "Заглавие ред 1 (бяло)", name: title1, widget: string, hint: "напр. АКАДЕМИЯ"}
-          - {label: "Заглавие ред 2 (злато)", name: title2, widget: string, hint: "напр. РЕЛАКС"}
+          - {label: "Заглавие ред 1 (бяло)", name: title1, widget: string}
+          - {label: "Заглавие ред 2 (злато)", name: title2, widget: string}
           - {label: "Подзаглавие", name: subtitle, widget: text}
-          - {label: "Фоново изображение на Hero", name: hero_image, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+          - {label: "Фоново изображение", name: hero_image, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
           - {label: "Брой учебни бази", name: stat_bases, widget: number, value_type: int}
           - {label: "Брой преподаватели", name: stat_teachers, widget: number, value_type: int}
-          - {label: "Брой дипломирани", name: stat_graduates, widget: string, hint: "напр. 2000+"}
+          - {label: "Брой дипломирани", name: stat_graduates, widget: string}
           - {label: "Брой специалности", name: stat_specialties, widget: number, value_type: int}
 
-
-      - name: "obucheniya"
-        label: "📄 Обучения"
-        file: "data/page-obucheniya.json"
-        fields:
-          - {label: "Малък таг (горе)", name: tag, widget: string, hint: "напр. Обучения"}
-          - {label: "Заглавие", name: title, widget: string, hint: "Главното заглавие на страницата"}
-          - {label: "Подзаглавие (незадължително)", name: subtitle, widget: string, required: false}
-
-      - name: "za-nas"
-        label: "📄 За нас"
-        file: "data/page-za-nas.json"
-        fields:
-          - {label: "Малък таг (горе)", name: tag, widget: string, hint: "напр. Обучения"}
-          - {label: "Заглавие", name: title, widget: string, hint: "Главното заглавие на страницата"}
-          - {label: "Подзаглавие (незадължително)", name: subtitle, widget: string, required: false}
-
-      - name: "uchebni-bazi"
-        label: "📄 Учебни бази"
-        file: "data/page-uchebni-bazi.json"
-        fields:
-          - {label: "Малък таг (горе)", name: tag, widget: string, hint: "напр. Обучения"}
-          - {label: "Заглавие", name: title, widget: string, hint: "Главното заглавие на страницата"}
-          - {label: "Подзаглавие (незадължително)", name: subtitle, widget: string, required: false}
-
-      - name: "zapisvane"
-        label: "📄 Запишете се"
-        file: "data/page-zapisvane.json"
-        fields:
-          - {label: "Малък таг (горе)", name: tag, widget: string, hint: "напр. Обучения"}
-          - {label: "Заглавие", name: title, widget: string, hint: "Главното заглавие на страницата"}
-          - {label: "Подзаглавие (незадължително)", name: subtitle, widget: string, required: false}
-
-      - name: "kontakti"
-        label: "📄 Контакти"
-        file: "data/page-kontakti.json"
-        fields:
-          - {label: "Малък таг (горе)", name: tag, widget: string, hint: "напр. Обучения"}
-          - {label: "Заглавие", name: title, widget: string, hint: "Главното заглавие на страницата"}
-          - {label: "Подзаглавие (незадължително)", name: subtitle, widget: string, required: false}
       - name: "contact"
         label: "📞 Контактна информация"
         file: "data/contact.json"
@@ -79,37 +41,192 @@ collections:
           - {label: "Facebook URL", name: facebook, widget: string, required: false}
           - {label: "Instagram URL", name: instagram, widget: string, required: false}
 
-  # ── ПРЕПОДАВАТЕЛИ ПО ОБЛАСТИ ─────────────────────────────────────────
-  - name: "all-specialists"
-    label: "👥 Всички преподаватели"
-    label_singular: "Преподавател"
-    folder: "data/regions/sliven"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+      - name: "footer"
+        label: "🔗 Полезни връзки и документи"
+        file: "data/footer.json"
+        fields:
+          - label: "Полезни връзки"
+            name: useful_links
+            widget: list
+            label_singular: "Връзка"
+            fields:
+              - {label: "Надпис", name: label, widget: string}
+              - {label: "URL адрес", name: url, widget: string}
+          - label: "Нормативни документи"
+            name: normative_docs
+            widget: list
+            label_singular: "Документ"
+            fields:
+              - {label: "Надпис", name: label, widget: string}
+              - {label: "URL адрес", name: url, widget: string}
+
+  # ════════════════════════════════════════════════
+  # СЪДЪРЖАНИЕ НА СТРАНИЦИТЕ
+  # ════════════════════════════════════════════════
+  - name: "pages"
+    label: "📄 Съдържание на страниците"
+    files:
+
+      - name: "obucheniya"
+        label: "📚 Обучения — заглавие"
+        file: "data/page-obucheniya.json"
+        fields:
+          - {label: "Малък таг", name: tag, widget: string}
+          - {label: "Заглавие", name: title, widget: string}
+          - {label: "Подзаглавие", name: subtitle, widget: string, required: false}
+
+      - name: "za-nas"
+        label: "👥 За нас — заглавие"
+        file: "data/page-za-nas.json"
+        fields:
+          - {label: "Малък таг", name: tag, widget: string}
+          - {label: "Заглавие", name: title, widget: string}
+          - {label: "Подзаглавие", name: subtitle, widget: string, required: false}
+
+      - name: "uchebni-bazi"
+        label: "📍 Учебни бази — заглавие"
+        file: "data/page-uchebni-bazi.json"
+        fields:
+          - {label: "Малък таг", name: tag, widget: string}
+          - {label: "Заглавие", name: title, widget: string}
+          - {label: "Подзаглавие", name: subtitle, widget: string, required: false}
+
+      - name: "zapisvane"
+        label: "✍️ Запишете се — заглавие"
+        file: "data/page-zapisvane.json"
+        fields:
+          - {label: "Малък таг", name: tag, widget: string}
+          - {label: "Заглавие", name: title, widget: string}
+          - {label: "Подзаглавие", name: subtitle, widget: string, required: false}
+
+      - name: "kontakti"
+        label: "📞 Контакти — заглавие"
+        file: "data/page-kontakti.json"
+        fields:
+          - {label: "Малък таг", name: tag, widget: string}
+          - {label: "Заглавие", name: title, widget: string}
+          - {label: "Подзаглавие", name: subtitle, widget: string, required: false}
+
+      - name: "about_content"
+        label: "👥 За нас — съдържание"
+        file: "data/about.json"
+        fields:
+          - {label: "Заглавие секция 1", name: section1_title, widget: string}
+          - {label: "Параграф 1", name: section1_para1, widget: text}
+          - {label: "Параграф 2", name: section1_para2, widget: text}
+          - {label: "Заглавие секция 2 (преподаватели)", name: section2_title, widget: string}
+          - {label: "Текст секция 2", name: section2_text, widget: text}
+          - {label: "CTA Заглавие", name: cta_title, widget: string}
+          - {label: "CTA Текст", name: cta_text, widget: string}
+          - label: "Ключови предимства (4 блока)"
+            name: approach_items
+            widget: list
+            label_singular: "Блок"
+            fields:
+              - {label: "Номер", name: number, widget: string}
+              - {label: "Заглавие", name: title, widget: string}
+              - {label: "Описание", name: description, widget: text}
+
+      - name: "enroll_content"
+        label: "✍️ Запишете се — съдържание"
+        file: "data/enroll.json"
+        fields:
+          - {label: "Главно заглавие", name: title, widget: string}
+          - {label: "Подзаглавие", name: subtitle, widget: text}
+          - label: "Стъпки"
+            name: steps
+            widget: list
+            label_singular: "Стъпка"
+            fields:
+              - {label: "Номер", name: number, widget: string}
+              - {label: "Заглавие", name: title, widget: string}
+              - {label: "Описание", name: description, widget: text}
+          - {label: "CTA Заглавие", name: cta_title, widget: string}
+          - {label: "CTA Текст", name: cta_text, widget: string}
+
+      - name: "courses_content"
+        label: "📚 Обучения — курсове"
+        file: "data/courses.json"
+        fields:
+          - label: "Фризьорство"
+            name: friz
+            widget: object
+            fields:
+              - {label: "Надпис на таба", name: label, widget: string}
+              - label: "Курсове"
+                name: courses
+                widget: list
+                label_singular: "Курс"
+                fields:
+                  - {label: "Категория", name: category, widget: string}
+                  - {label: "Наименование", name: name, widget: string}
+                  - {label: "Описание", name: description, widget: text}
+                  - {label: "Продължителност", name: duration, widget: string}
+                  - {label: "Сертификат/диплома", name: certificate, widget: string}
+          - label: "Маникюр, педикюр и ноктопластика"
+            name: nails
+            widget: object
+            fields:
+              - {label: "Надпис на таба", name: label, widget: string}
+              - label: "Курсове"
+                name: courses
+                widget: list
+                label_singular: "Курс"
+                fields:
+                  - {label: "Категория", name: category, widget: string}
+                  - {label: "Наименование", name: name, widget: string}
+                  - {label: "Описание", name: description, widget: text}
+                  - {label: "Продължителност", name: duration, widget: string}
+                  - {label: "Сертификат/диплома", name: certificate, widget: string}
+          - label: "Козметика"
+            name: cosm
+            widget: object
+            fields:
+              - {label: "Надпис на таба", name: label, widget: string}
+              - label: "Курсове"
+                name: courses
+                widget: list
+                label_singular: "Курс"
+                fields:
+                  - {label: "Категория", name: category, widget: string}
+                  - {label: "Наименование", name: name, widget: string}
+                  - {label: "Описание", name: description, widget: text}
+                  - {label: "Продължителност", name: duration, widget: string}
+                  - {label: "Сертификат/диплома", name: certificate, widget: string}
+          - label: "Специализирани"
+            name: spec
+            widget: object
+            fields:
+              - {label: "Надпис на таба", name: label, widget: string}
+              - label: "Курсове"
+                name: courses
+                widget: list
+                label_singular: "Курс"
+                fields:
+                  - {label: "Категория", name: category, widget: string}
+                  - {label: "Наименование", name: name, widget: string}
+                  - {label: "Описание", name: description, widget: text}
+                  - {label: "Продължителност", name: duration, widget: string}
+                  - {label: "Сертификат/диплома", name: certificate, widget: string}
+          - label: "Други квалификации"
+            name: other
+            widget: object
+            fields:
+              - {label: "Надпис на таба", name: label, widget: string}
+              - label: "Курсове"
+                name: courses
+                widget: list
+                label_singular: "Курс"
+                fields:
+                  - {label: "Категория", name: category, widget: string}
+                  - {label: "Наименование", name: name, widget: string}
+                  - {label: "Описание", name: description, widget: text}
+                  - {label: "Продължителност", name: duration, widget: string}
+                  - {label: "Сертификат/диплома", name: certificate, widget: string}
+
+  # ════════════════════════════════════════════════
+  # ПРЕПОДАВАТЕЛИ ПО ОБЛАСТИ — 28 ОБЛАСТИ
+  # ════════════════════════════════════════════════
 
   - name: "region-blagoevgrad"
     label: "📍 Благоевград (8)"
@@ -117,11 +234,13 @@ collections:
     folder: "data/regions/blagoevgrad"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -149,523 +268,13 @@ collections:
     folder: "data/regions/burgas"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-dobrich"
-    label: "📍 Добрич (5)"
-    label_singular: "Преподавател"
-    folder: "data/regions/dobrich"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-gabrovo"
-    label: "📍 Габрово (3)"
-    label_singular: "Преподавател"
-    folder: "data/regions/gabrovo"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-haskovo"
-    label: "📍 Хасково (10)"
-    label_singular: "Преподавател"
-    folder: "data/regions/haskovo"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-kardzhali"
-    label: "📍 Кърджали (2)"
-    label_singular: "Преподавател"
-    folder: "data/regions/kardzhali"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-kyustendil"
-    label: "📍 Кюстендил (5)"
-    label_singular: "Преподавател"
-    folder: "data/regions/kyustendil"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-montana"
-    label: "📍 Монтана (2)"
-    label_singular: "Преподавател"
-    folder: "data/regions/montana"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-pazardzhik"
-    label: "📍 Пазарджик (2)"
-    label_singular: "Преподавател"
-    folder: "data/regions/pazardzhik"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-pernik"
-    label: "📍 Перник (2)"
-    label_singular: "Преподавател"
-    folder: "data/regions/pernik"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-plovdiv"
-    label: "📍 Пловдив (13)"
-    label_singular: "Преподавател"
-    folder: "data/regions/plovdiv"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-razgrad"
-    label: "📍 Разград (2)"
-    label_singular: "Преподавател"
-    folder: "data/regions/razgrad"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-ruse"
-    label: "📍 Русе (5)"
-    label_singular: "Преподавател"
-    folder: "data/regions/ruse"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-sliven"
-    label: "📍 Сливен (30)"
-    label_singular: "Преподавател"
-    folder: "data/regions/sliven"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-smolyan"
-    label: "📍 Смолян (3)"
-    label_singular: "Преподавател"
-    folder: "data/regions/smolyan"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-sofiya-oblast"
-    label: "📍 София-Област (37)"
-    label_singular: "Преподавател"
-    folder: "data/regions/sofiya-oblast"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-stara-zagora"
-    label: "📍 Стара Загора (8)"
-    label_singular: "Преподавател"
-    folder: "data/regions/stara-zagora"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
-      - {label: "Имена", name: name, widget: string}
-      - {label: "Телефон 1", name: phone1, widget: string, required: false}
-      - {label: "Телефон 2", name: phone2, widget: string, required: false}
-      - label: "Специалности"
-        name: specialties
-        widget: select
-        multiple: true
-        required: false
-        options:
-          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
-          - {label: "Фризьорство", value: "Фризьорство"}
-          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
-          - {label: "Козметика", value: "Козметика"}
-          - {label: "Масаж", value: "Масаж"}
-          - {label: "Миглопластика", value: "Миглопластика"}
-          - {label: "Микроблейдинг", value: "Микроблейдинг"}
-          - {label: "Грим", value: "Грим"}
-          - {label: "Перманентен грим", value: "Перманентен грим"}
-          - {label: "Спорт", value: "Спорт"}
-      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
-
-  - name: "region-targovishte"
-    label: "📍 Търговище (3)"
-    label_singular: "Преподавател"
-    folder: "data/regions/targovishte"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    identifier_field: name
-    summary: "{{name}} — {{phone1}}"
-    fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -693,11 +302,13 @@ collections:
     folder: "data/regions/varna"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -725,11 +336,13 @@ collections:
     folder: "data/regions/veliko-tarnovo"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -757,11 +370,13 @@ collections:
     folder: "data/regions/vidin"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -789,11 +404,13 @@ collections:
     folder: "data/regions/vratsa"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -815,17 +432,121 @@ collections:
           - {label: "Спорт", value: "Спорт"}
       - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
 
-  - name: "region-yambol"
-    label: "📍 Ямбол (12)"
+  - name: "region-gabrovo"
+    label: "📍 Габрово (3)"
     label_singular: "Преподавател"
-    folder: "data/regions/yambol"
+    folder: "data/regions/gabrovo"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true, hint: "Скрий/покажи преподавателя"}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-dobrich"
+    label: "📍 Добрич (5)"
+    label_singular: "Преподавател"
+    folder: "data/regions/dobrich"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-kardzhali"
+    label: "📍 Кърджали (2)"
+    label_singular: "Преподавател"
+    folder: "data/regions/kardzhali"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-kyustendil"
+    label: "📍 Кюстендил (5)"
+    label_singular: "Преподавател"
+    folder: "data/regions/kyustendil"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -853,11 +574,115 @@ collections:
     folder: "data/regions/lovech"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-montana"
+    label: "📍 Монтана (2)"
+    label_singular: "Преподавател"
+    folder: "data/regions/montana"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-pazardzhik"
+    label: "📍 Пазарджик (2)"
+    label_singular: "Преподавател"
+    folder: "data/regions/pazardzhik"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-pernik"
+    label: "📍 Перник (2)"
+    label_singular: "Преподавател"
+    folder: "data/regions/pernik"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -885,11 +710,115 @@ collections:
     folder: "data/regions/pleven"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-plovdiv"
+    label: "📍 Пловдив (13)"
+    label_singular: "Преподавател"
+    folder: "data/regions/plovdiv"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-razgrad"
+    label: "📍 Разград (2)"
+    label_singular: "Преподавател"
+    folder: "data/regions/razgrad"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-ruse"
+    label: "📍 Русе (5)"
+    label_singular: "Преподавател"
+    folder: "data/regions/ruse"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -917,11 +846,115 @@ collections:
     folder: "data/regions/silistra"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-sliven"
+    label: "📍 Сливен (30)"
+    label_singular: "Преподавател"
+    folder: "data/regions/sliven"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-smolyan"
+    label: "📍 Смолян (3)"
+    label_singular: "Преподавател"
+    folder: "data/regions/smolyan"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-sofiya-oblast"
+    label: "📍 София-Област (37)"
+    label_singular: "Преподавател"
+    folder: "data/regions/sofiya-oblast"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -949,11 +982,115 @@ collections:
     folder: "data/regions/sofiya"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-stara-zagora"
+    label: "📍 Стара Загора (8)"
+    label_singular: "Преподавател"
+    folder: "data/regions/stara-zagora"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-targovishte"
+    label: "📍 Търговище (3)"
+    label_singular: "Преподавател"
+    folder: "data/regions/targovishte"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-haskovo"
+    label: "📍 Хасково (10)"
+    label_singular: "Преподавател"
+    folder: "data/regions/haskovo"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -981,11 +1118,13 @@ collections:
     folder: "data/regions/shumen"
     create: true
     delete: true
+    extension: json
+    format: json
     slug: "{{slug}}"
     identifier_field: name
     summary: "{{name}} — {{phone1}}"
     fields:
-      - {label: "Активен", name: active, widget: boolean, default: true}
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
       - {label: "Имена", name: name, widget: string}
       - {label: "Телефон 1", name: phone1, widget: string, required: false}
       - {label: "Телефон 2", name: phone2, widget: string, required: false}
@@ -1006,3 +1145,38 @@ collections:
           - {label: "Перманентен грим", value: "Перманентен грим"}
           - {label: "Спорт", value: "Спорт"}
       - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+
+  - name: "region-yambol"
+    label: "📍 Ямбол (12)"
+    label_singular: "Преподавател"
+    folder: "data/regions/yambol"
+    create: true
+    delete: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{phone1}}"
+    fields:
+      - {label: "Активен на сайта", name: active, widget: boolean, default: true}
+      - {label: "Имена", name: name, widget: string}
+      - {label: "Телефон 1", name: phone1, widget: string, required: false}
+      - {label: "Телефон 2", name: phone2, widget: string, required: false}
+      - label: "Специалности"
+        name: specialties
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - {label: "Маникюр, педикюр и ноктопластика", value: "Маникюр & Ноктопластика"}
+          - {label: "Фризьорство", value: "Фризьорство"}
+          - {label: "Бръснаро-фризьорство", value: "Бръснаро-фризьорство"}
+          - {label: "Козметика", value: "Козметика"}
+          - {label: "Масаж", value: "Масаж"}
+          - {label: "Миглопластика", value: "Миглопластика"}
+          - {label: "Микроблейдинг", value: "Микроблейдинг"}
+          - {label: "Грим", value: "Грим"}
+          - {label: "Перманентен грим", value: "Перманентен грим"}
+          - {label: "Спорт", value: "Спорт"}
+      - {label: "Профилна снимка", name: photo, widget: image, required: false, media_folder: "/photos", public_folder: "/photos"}
+

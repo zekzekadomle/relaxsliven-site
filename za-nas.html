@@ -1610,17 +1610,47 @@ if (window.netlifyIdentity) {
   });
 }
 </script>
+
 <script>
-fetch('/data/page-za-nas.json').then(function(r){return r.json();}).then(function(d){
-  var tag = document.querySelector('.ih-c .tag');
-  var h1  = document.querySelector('.ih-c h1');
-  if (tag && d.tag)   tag.textContent = d.tag;
-  if (h1  && d.title) h1.innerHTML    = d.title;
-  if (d.subtitle) {
-    var sub = document.querySelector('.ih-c .ih-sub');
-    if (sub) sub.textContent = d.subtitle;
-  }
-}).catch(function(){});
+(function(){
+  fetch('/data/page-za-nas.json').then(function(r){return r.json();}).then(function(d){
+    var tag=document.querySelector('.ih-c .tag');
+    var h1=document.querySelector('.ih-c h1');
+    if(tag&&d.tag) tag.textContent=d.tag;
+    if(h1&&d.title) h1.innerHTML=d.title;
+    if(d.subtitle){var s=document.querySelector('.ih-c .ih-sub');if(s)s.textContent=d.subtitle;}
+  }).catch(function(){});
+  fetch('/data/contact.json').then(function(r){return r.json();}).then(function(d){
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(el){el.href='tel:'+d.phone.replace(/\s/g,'');});
+    document.querySelectorAll('.nav-phone,.nb-phone').forEach(function(el){el.textContent=d.phone;});
+  }).catch(function(){});
+  fetch('/data/footer.json').then(function(r){return r.json();}).then(function(d){
+    var ftCols=document.querySelectorAll('.ft-col');
+    ftCols.forEach(function(col){
+      var h4=col.querySelector('h4');if(!h4)return;
+      if(h4.textContent.trim()==='Полезни връзки'&&d.useful_links){var ul=col.querySelector('ul');if(ul)ul.innerHTML=d.useful_links.map(function(l){return '<li><a class="ft-link" href="'+l.url+'" target="_blank" rel="noopener">'+l.label+'</a></li>';}).join('');}
+      if(h4.textContent.trim()==='Нормативни документи'&&d.normative_docs){var ul2=col.querySelector('ul');if(ul2)ul2.innerHTML=d.normative_docs.map(function(l){return '<li><button onclick="location.href=''+l.url+''">'+l.label+'</button></li>';}).join('');}
+    });
+  }).catch(function(){});
+})();
+</script><script>
+(function(){
+  fetch('/data/about.json').then(function(r){return r.json();}).then(function(d){
+    var h2s=document.querySelectorAll('.about-body h2, .cpg-body h2');
+    if(h2s[0]&&d.section1_title) h2s[0].textContent=d.section1_title;
+    var ps=document.querySelectorAll('.about-body p');
+    if(ps[0]&&d.section1_para1) ps[0].textContent=d.section1_para1;
+    if(ps[1]&&d.section1_para2) ps[1].textContent=d.section1_para2;
+    if(d.approach_items&&d.approach_items.length){
+      var amts=document.querySelectorAll('.am-t');
+      var amds=document.querySelectorAll('.am-d');
+      d.approach_items.forEach(function(item,i){
+        if(amts[i]) amts[i].textContent=item.title;
+        if(amds[i]) amds[i].textContent=item.description;
+      });
+    }
+  }).catch(function(){});
+})();
 </script>
 </body>
 </html>

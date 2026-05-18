@@ -1,12 +1,251 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ЦПО Релакс — Административен панел</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ЦПО Релакс — Администрация</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<script>
+
+// ── Specialist card preview ────────────────────────────────────────────────
+var SpecialistPreview = createClass({
+  render: function() {
+    var entry   = this.props.entry;
+    var name    = entry.getIn(['data','name']) || 'Име';
+    var phone1  = entry.getIn(['data','phone1']) || '';
+    var phone2  = entry.getIn(['data','phone2']) || '';
+    var photo   = entry.getIn(['data','photo']) || '';
+    var specsRaw= entry.getIn(['data','specialties']);
+    var active  = entry.getIn(['data','active']); if(active===undefined) active=true;
+    var specs   = specsRaw && specsRaw.toJS ? specsRaw.toJS() : (Array.isArray(specsRaw) ? specsRaw : []);
+    var init    = name.split(/[\s\-]+/).filter(Boolean).map(function(w){return w[0]||'';}).join('').slice(0,2).toUpperCase();
+
+    var COLORS = {'Маникюр & Ноктопластика':'#b8860b','Фризьорство':'#1a6f8a','Бръснаро-фризьорство':'#1a3a8a','Козметика':'#8a1a7a','Масаж':'#8a2a1a','Миглопластика':'#5a1a8a','Микроблейдинг':'#7a5a1a','Грим':'#2a7a1a','Перманентен грим':'#7a1a6a','Спорт':'#1a6b2a'};
+    var BGS    = {'Маникюр & Ноктопластика':'#fff3db','Фризьорство':'#e0f0f7','Бръснаро-фризьорство':'#e0e8f7','Козметика':'#f7e0f4','Масаж':'#ffe8e0','Миглопластика':'#ede0f7','Микроблейдинг':'#f7f0e0','Грим':'#e4f7e0','Перманентен грим':'#fce8f7','Спорт':'#e0f7e4'};
+
+    return h('div',{style:{fontFamily:'Arial,sans-serif',padding:'20px',background:'#f5f3ef',minHeight:'100vh'}},
+      h('div',{style:{marginBottom:'12px'}},
+        h('span',{style:{background:active?'#e4f7e0':'#ffe8e0',color:active?'#2a7a1a':'#8a2a1a',padding:'4px 14px',borderRadius:'20px',fontSize:'12px',fontWeight:'700'}}, active?'✓ Активен':'✗ Скрит')
+      ),
+      h('div',{style:{background:'#fff',borderRadius:'4px',overflow:'hidden',boxShadow:'0 4px 20px rgba(0,0,0,.12)',maxWidth:'240px',opacity:active?1:.5}},
+        h('div',{style:{width:'100%',aspectRatio:'4/5',background:'#111',display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden',minHeight:'200px',position:'relative'}},
+          photo
+            ? h('img',{src:photo,style:{width:'100%',height:'100%',objectFit:'cover',objectPosition:'top center',position:'absolute',inset:0}})
+            : h('span',{style:{fontFamily:'Georgia,serif',fontSize:'3rem',color:'#d4a017',fontWeight:'700'}}, init)
+        ),
+        h('div',{style:{padding:'12px'}},
+          specs.length ? h('div',{style:{display:'flex',flexWrap:'wrap',gap:'3px',marginBottom:'8px'}},
+            specs.slice(0,3).map(function(sp){
+              return h('span',{key:sp,style:{background:BGS[sp]||'#f0f0f0',color:COLORS[sp]||'#444',border:'1px solid '+(COLORS[sp]||'#ccc'),borderRadius:'2px',fontSize:'10px',fontWeight:'700',padding:'2px 6px',textTransform:'uppercase',letterSpacing:'.04em'}},
+                sp==='Маникюр & Ноктопластика'?'Маникюр & Нокти':sp);
+            })
+          ) : null,
+          h('div',{style:{fontFamily:'Georgia,serif',fontSize:'15px',fontWeight:'700',color:'#111',marginBottom:'6px'}}, name),
+          phone1 ? h('div',{style:{fontSize:'12px',color:'#333',marginBottom:'2px'}}, '📞 '+phone1) : null,
+          phone2 ? h('div',{style:{fontSize:'12px',color:'#333',marginBottom:'2px'}}, '📞 '+phone2) : null,
+          h('div',{style:{marginTop:'10px',background:'#d4a017',color:'#000',padding:'6px 12px',fontSize:'10px',fontWeight:'700',letterSpacing:'.14em',textTransform:'uppercase',textAlign:'center'}}, 'СВЪРЖЕТЕ СЕ →')
+        )
+      ),
+      h('div',{style:{marginTop:'16px',background:'#fff',border:'1px solid #e0e0e0',borderRadius:'4px',padding:'12px',fontSize:'12px',color:'#666',maxWidth:'240px'}},
+        h('b',{style:{display:'block',marginBottom:'6px',color:'#333'}}, 'ℹ️ Инфо'),
+        h('div',null,'• Снимка: JPG/PNG, 600×750px'),
+        h('div',null,'• Промените се публикуват ~30 сек'),
+        h('div',null,'• Деактивиран = скрит от сайта')
+      )
+    );
+  }
+});
+
+// ── Hero preview ──────────────────────────────────────────────────────────
+var HeroPreview = createClass({
+  render: function() {
+    var e=this.props.entry;
+    var t1=e.getIn(['data','title1'])||'АКАДЕМИЯ', t2=e.getIn(['data','title2'])||'РЕЛАКС';
+    var sub=e.getIn(['data','subtitle'])||'';
+    var img=e.getIn(['data','hero_image'])||'';
+    var stats=[[e.getIn(['data','stat_bases'])||21,'Учебни бази'],[e.getIn(['data','stat_teachers'])||95,'Преподаватели'],[e.getIn(['data','stat_graduates'])||'2000+','Дипломирани'],[e.getIn(['data','stat_specialties'])||56,'Специалности']];
+    return h('div',{style:{fontFamily:'Arial,sans-serif',background:'#0e0e0e',color:'#fff',minHeight:'420px',padding:'50px',position:'relative',overflow:'hidden'}},
+      img?h('img',{src:img,style:{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',opacity:.3}}):null,
+      h('div',{style:{position:'relative',zIndex:2}},
+        h('div',{style:{fontSize:'10px',letterSpacing:'.28em',color:'#d4a017',textTransform:'uppercase',marginBottom:'18px'}}, '— ЦЕНТЪР ЗА ПРОФЕСИОНАЛНО ОБУЧЕНИЕ'),
+        h('div',{style:{fontSize:'64px',fontFamily:'Georgia,serif',fontWeight:'900',lineHeight:.95,color:'#fff'}}, t1),
+        h('div',{style:{fontSize:'64px',fontFamily:'Georgia,serif',fontWeight:'900',lineHeight:.95,color:'#d4a017',marginBottom:'22px'}}, t2),
+        h('div',{style:{fontSize:'14px',color:'rgba(255,255,255,.55)',maxWidth:'420px',lineHeight:1.75,marginBottom:'32px'}}, sub),
+        h('div',{style:{display:'flex'}},
+          stats.map(function(s,i){
+            return h('div',{key:i,style:{padding:'14px 22px',borderLeft:i>0?'1px solid rgba(255,255,255,.08)':'none',borderTop:'1px solid rgba(212,160,23,.25)'}},
+              h('div',{style:{fontSize:'30px',fontFamily:'Georgia,serif',fontWeight:'900',color:'#d4a017'}}, s[0]),
+              h('div',{style:{fontSize:'9px',letterSpacing:'.14em',textTransform:'uppercase',color:'rgba(255,255,255,.35)',marginTop:'3px'}}, s[1])
+            );
+          })
+        )
+      )
+    );
+  }
+});
+
+// ── Page header preview ────────────────────────────────────────────────────
+var PageHeaderPreview = createClass({
+  render: function() {
+    var e=this.props.entry;
+    var tag=e.getIn(['data','tag'])||'';
+    var title=e.getIn(['data','title'])||'';
+    var sub=e.getIn(['data','subtitle'])||'';
+    return h('div',{style:{fontFamily:'Arial,sans-serif',background:'#0e0e0e',padding:'60px 50px 40px',minHeight:'240px'}},
+      h('div',{style:{fontSize:'10px',letterSpacing:'.2em',color:'#d4a017',textTransform:'uppercase',marginBottom:'14px',display:'flex',alignItems:'center',gap:'10px'}},
+        h('span',{style:{width:'28px',height:'1px',background:'#d4a017',display:'inline-block'}}), tag
+      ),
+      h('div',{style:{fontSize:'56px',fontFamily:'Georgia,serif',fontWeight:'900',color:'#fff',lineHeight:.95,letterSpacing:'.02em'}}, title),
+      sub?h('div',{style:{marginTop:'14px',fontSize:'14px',color:'rgba(255,255,255,.45)'}}, sub):null
+    );
+  }
+});
+
+// ── Contact preview ──────────────────────────────────────────────────────
+var ContactPreview = createClass({
+  render: function() {
+    var e=this.props.entry;
+    var rows=[['Директор',e.getIn(['data','director'])],['Телефон',e.getIn(['data','phone'])],['Имейл 1',e.getIn(['data','email1'])],['Имейл 2',e.getIn(['data','email2'])],['Адрес',e.getIn(['data','address'])],['Facebook',e.getIn(['data','facebook'])],['Instagram',e.getIn(['data','instagram'])]];
+    return h('div',{style:{fontFamily:'Arial,sans-serif',padding:'24px',background:'#f9f9f9'}},
+      h('div',{style:{fontWeight:'700',fontSize:'15px',marginBottom:'16px',color:'#111'}}, '📞 Контактна информация'),
+      rows.filter(function(r){return r[1];}).map(function(r){
+        return h('div',{key:r[0],style:{display:'flex',gap:'14px',padding:'10px 0',borderBottom:'1px solid #eee'}},
+          h('div',{style:{fontWeight:'700',color:'#999',fontSize:'11px',textTransform:'uppercase',letterSpacing:'.08em',width:'85px',flexShrink:0,paddingTop:'2px'}}, r[0]),
+          h('div',{style:{color:'#333',fontSize:'13px'}}, r[1])
+        );
+      })
+    );
+  }
+});
+
+// ── Footer links preview ───────────────────────────────────────────────────
+var FooterPreview = createClass({
+  render: function() {
+    var e=this.props.entry;
+    var useful=e.getIn(['data','useful_links']);
+    var docs=e.getIn(['data','normative_docs']);
+    var ul=useful&&useful.toJS?useful.toJS():(Array.isArray(useful)?useful:[]);
+    var dl=docs&&docs.toJS?docs.toJS():(Array.isArray(docs)?docs:[]);
+    return h('div',{style:{fontFamily:'Arial,sans-serif',background:'#0e0e0e',padding:'30px',display:'flex',gap:'40px',flexWrap:'wrap'}},
+      h('div',null,
+        h('div',{style:{fontSize:'10px',letterSpacing:'.18em',textTransform:'uppercase',color:'#d4a017',marginBottom:'14px',fontWeight:'700'}}, 'Полезни връзки'),
+        ul.map(function(l){return h('div',{key:l.label,style:{fontSize:'13px',color:'rgba(255,255,255,.45)',marginBottom:'6px',cursor:'pointer'}}, l.label);})
+      ),
+      h('div',null,
+        h('div',{style:{fontSize:'10px',letterSpacing:'.18em',textTransform:'uppercase',color:'#d4a017',marginBottom:'14px',fontWeight:'700'}}, 'Нормативни документи'),
+        dl.map(function(l){return h('div',{key:l.label,style:{fontSize:'13px',color:'rgba(255,255,255,.45)',marginBottom:'6px',cursor:'pointer'}}, l.label);})
+      )
+    );
+  }
+});
+
+// ── About content preview ──────────────────────────────────────────────────
+var AboutPreview = createClass({
+  render: function() {
+    var e=this.props.entry;
+    var t1=e.getIn(['data','section1_title'])||'';
+    var p1=e.getIn(['data','section1_para1'])||'';
+    var p2=e.getIn(['data','section1_para2'])||'';
+    var itemsRaw=e.getIn(['data','approach_items']);
+    var items=itemsRaw&&itemsRaw.toJS?itemsRaw.toJS():(Array.isArray(itemsRaw)?itemsRaw:[]);
+    return h('div',{style:{fontFamily:'Arial,sans-serif',padding:'30px',background:'#fff',maxWidth:'700px'}},
+      h('div',{style:{fontSize:'28px',fontFamily:'Georgia,serif',fontWeight:'900',color:'#111',marginBottom:'16px'}}, t1),
+      h('div',{style:{fontSize:'14px',color:'#555',lineHeight:1.7,marginBottom:'10px'}}, p1),
+      h('div',{style:{fontSize:'14px',color:'#555',lineHeight:1.7,marginBottom:'24px'}}, p2),
+      items.length ? h('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1px',background:'rgba(212,160,23,.15)'}},
+        items.map(function(item){
+          return h('div',{key:item.number,style:{background:'#fafafa',padding:'20px'}},
+            h('div',{style:{fontSize:'32px',fontFamily:'Georgia,serif',color:'rgba(212,160,23,.3)',fontWeight:'900',lineHeight:1}}, item.number),
+            h('div',{style:{fontSize:'13px',fontWeight:'700',color:'#d4a017',margin:'6px 0 4px'}}, item.title),
+            h('div',{style:{fontSize:'12px',color:'#666',lineHeight:1.6}}, item.description)
+          );
+        })
+      ) : null
+    );
+  }
+});
+
+// ── Enrollment preview ─────────────────────────────────────────────────────
+var EnrollPreview = createClass({
+  render: function() {
+    var e=this.props.entry;
+    var title=e.getIn(['data','title'])||'';
+    var sub=e.getIn(['data','subtitle'])||'';
+    var stepsRaw=e.getIn(['data','steps']);
+    var steps=stepsRaw&&stepsRaw.toJS?stepsRaw.toJS():(Array.isArray(stepsRaw)?stepsRaw:[]);
+    return h('div',{style:{fontFamily:'Arial,sans-serif',padding:'30px',background:'#fff',maxWidth:'700px'}},
+      h('div',{style:{fontSize:'26px',fontFamily:'Georgia,serif',fontWeight:'900',color:'#111',marginBottom:'8px'}}, title),
+      h('div',{style:{fontSize:'13px',color:'#888',marginBottom:'24px',lineHeight:1.6}}, sub),
+      steps.map(function(step,i){
+        return h('div',{key:i,style:{display:'flex',gap:0,marginBottom:'1px'}},
+          h('div',{style:{width:'70px',background:'rgba(212,160,23,.06)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}},
+            h('span',{style:{fontFamily:'Georgia,serif',fontSize:'2.2rem',color:'rgba(212,160,23,.35)',fontWeight:'900'}}, step.number)
+          ),
+          h('div',{style:{flex:1,padding:'16px 20px',background:'#fafafa',borderBottom:'1px solid #f0f0f0'}},
+            h('div',{style:{fontWeight:'700',color:'#111',marginBottom:'4px',fontSize:'14px'}}, step.title),
+            h('div',{style:{fontSize:'12px',color:'#666',lineHeight:1.6}}, step.description)
+          )
+        );
+      })
+    );
+  }
+});
+
+// ── Courses preview ────────────────────────────────────────────────────────
+var CoursesPreview = createClass({
+  render: function() {
+    var e=this.props.entry;
+    var tabs=['friz','nails','cosm','spec','other'];
+    var tabLabels={'friz':'Фризьорство','nails':'Маникюр & Нокти','cosm':'Козметика','spec':'Специализирани','other':'Други'};
+    return h('div',{style:{fontFamily:'Arial,sans-serif',background:'#0e0e0e',padding:'20px',minHeight:'400px'}},
+      tabs.map(function(tabId){
+        var tabData=e.getIn(['data',tabId]);
+        var courses=tabData&&tabData.get?tabData.get('courses'):null;
+        var coursesList=courses&&courses.toJS?courses.toJS():(Array.isArray(courses)?courses:[]);
+        return h('div',{key:tabId,style:{marginBottom:'24px'}},
+          h('div',{style:{fontSize:'10px',letterSpacing:'.18em',textTransform:'uppercase',color:'#d4a017',marginBottom:'10px',fontWeight:'700',borderBottom:'1px solid rgba(212,160,23,.2)',paddingBottom:'8px'}}, tabLabels[tabId]),
+          coursesList.slice(0,2).map(function(c,i){
+            return h('div',{key:i,style:{background:'rgba(255,255,255,.04)',padding:'12px 16px',marginBottom:'1px'}},
+              h('div',{style:{fontSize:'9px',letterSpacing:'.1em',textTransform:'uppercase',color:'rgba(212,160,23,.6)',marginBottom:'3px'}}, c.category),
+              h('div',{style:{fontSize:'13px',fontWeight:'600',color:'#fff',marginBottom:'3px'}}, c.name),
+              h('div',{style:{display:'flex',gap:'12px'}},
+                c.duration?h('span',{style:{fontSize:'10px',background:'rgba(212,160,23,.12)',color:'#d4a017',padding:'2px 8px',borderRadius:'2px'}}, c.duration):null,
+                c.certificate?h('span',{style:{fontSize:'10px',background:'rgba(255,255,255,.06)',color:'rgba(255,255,255,.45)',padding:'2px 8px',borderRadius:'2px'}}, c.certificate):null
+              )
+            );
+          }),
+          coursesList.length>2?h('div',{style:{fontSize:'11px',color:'rgba(255,255,255,.25)',paddingLeft:'16px',paddingTop:'6px'}}, '+ '+(coursesList.length-2)+' още'):null
+        );
+      })
+    );
+  }
+});
+
+// ── Register all previews ──────────────────────────────────────────────────
+var regionSlugs=[
+  'blagoevgrad','burgas','varna','veliko-tarnovo','vidin','vratsa','gabrovo',
+  'dobrich','kardzhali','kyustendil','lovech','montana','pazardzhik','pernik',
+  'pleven','plovdiv','razgrad','ruse','silistra','sliven','smolyan',
+  'sofiya-oblast','sofiya','stara-zagora','targovishte','haskovo','shumen','yambol',
+  'all-specialists'
+];
+regionSlugs.forEach(function(r){ CMS.registerPreviewTemplate('region-'+r, SpecialistPreview); });
+
+CMS.registerPreviewTemplate('hero',            HeroPreview);
+CMS.registerPreviewTemplate('obucheniya',      PageHeaderPreview);
+CMS.registerPreviewTemplate('za-nas',          PageHeaderPreview);
+CMS.registerPreviewTemplate('uchebni-bazi',    PageHeaderPreview);
+CMS.registerPreviewTemplate('zapisvane',       PageHeaderPreview);
+CMS.registerPreviewTemplate('kontakti',        PageHeaderPreview);
+CMS.registerPreviewTemplate('contact',         ContactPreview);
+CMS.registerPreviewTemplate('footer',          FooterPreview);
+CMS.registerPreviewTemplate('about_content',   AboutPreview);
+CMS.registerPreviewTemplate('enroll_content',  EnrollPreview);
+CMS.registerPreviewTemplate('courses_content', CoursesPreview);
+
+</script>
 </body>
 </html>

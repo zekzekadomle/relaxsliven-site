@@ -1,0 +1,54 @@
+{
+  "useful_links": [
+    {
+      "label": "НАПОО",
+      "url": "https://www.navet.government.bg"
+    },
+    {
+      "label": "Министерство на образованието",
+      "url": "https://www.mon.bg"
+    },
+    {
+      "label": "Регистър на ЦПО",
+      "url": "https://www.navet.government.bg/bg/registri/registar-na-licenzirani-cpo/"
+    },
+    {
+      "label": "Агенция по заетостта",
+      "url": "https://www.az.government.bg"
+    },
+    {
+      "label": "Europass",
+      "url": "https://europa.eu/europass/bg"
+    },
+    {
+      "label": "Занаятчийска камара",
+      "url": "https://www.cci.bg"
+    }
+  ],
+  "normative_docs": [
+    {
+      "label": "ДОС — Фризьор (2020)",
+      "url": "obucheniya.html"
+    },
+    {
+      "label": "ДОС — Козметик (2018)",
+      "url": "obucheniya.html"
+    },
+    {
+      "label": "ДОС — МПН (2020)",
+      "url": "obucheniya.html"
+    },
+    {
+      "label": "Закон за занаятите",
+      "url": "obucheniya.html"
+    },
+    {
+      "label": "Закон за ПОО",
+      "url": "obucheniya.html"
+    },
+    {
+      "label": "Наредби НАПОО",
+      "url": "obucheniya.html"
+    }
+  ]
+}
